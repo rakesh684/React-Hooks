@@ -1,22 +1,7 @@
-import React ,{useState} from "react"
+import React ,{useState,useEffect} from "react"
+import randomColor from "randomcolor";
 import './App.css';
-// class App extends React.Component {
-//   constructor(){
-//     super()
-//     this.state={
-//       answer:"Yes"
-//     }
-//   }
-//   render(){
-//     return (
-//       <div className="App">
-//        <h1>{`${this.state.answer}, Rakesh is doing good`}</h1>
-//       </div>
-//     );
-//   }
-// }
-// converting above class component into functional component
-
+import Count from "./count"
 function App(){
   const [inputData,setInputData]=useState(
     {
@@ -41,7 +26,15 @@ function App(){
   }
   const contacts=contactData.map(contact=>
     <h2 key={contact.firstName + contact.lastName}>
-     {contact.firstName} {contact.lastName}</h2>)
+     {contact.firstName} {contact.lastName}</h2>
+     )
+
+
+  const [color,setColor]=useState("")
+
+  useEffect(()=>{
+        setColor(randomColor())
+  },[setContactData])
   return(
     <>
       <form>
@@ -60,7 +53,8 @@ function App(){
           <br/>
           <button onClick={handleSubmit} >Button</button>
       </form>
-      {contacts}
+      <h1 style={{color:color}}>{contacts}</h1>
+      <Count />
     </>
   )
 }
